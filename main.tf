@@ -48,18 +48,15 @@ resource "aws_route_table" "rds_route" {
 resource "aws_route_table_association" "public" {
    subnet_id = aws_subnet.public.id 
    route_table_id = aws_route_table.rds_route.id
-
-   tags = {
-     Name = "rd_tab"
-  }
 }
 
 resource "aws_route" "rds_r" {
   gateway_id = aws_internet_gateway.igw4.id
-  cidr_block = "0.0.0.0/0"
+  destination_cidr_block = "0.0.0.0/0"
+  route_table_id = aws_route_table.rds_route.id
 }
 
-resource "aws_security_groug" "ec2_sg1" {
+resource "aws_security_group" "ec2_sg1" {
   vpc_id = aws_vpc.vpc_rds.id 
 
   ingress {
@@ -95,7 +92,7 @@ resource "aws_instance" "rds-ec2" {
   instance_type = var.instance_type
   key_name = var.key_name
   subnet_id = aws_subnet.public.id
-  aws_security_group_ids = [aws_security_group_id.ec2-sg1.id]
+  vpc_security_group_ids = [aws_security_group_id.ec2-sg1.id]
 
   
   user_data = <<-EOF
@@ -133,7 +130,6 @@ resource "aws_security_group" "rds_sg" {
     to_port = 3306
     protocol = "tcp"
   }
-    security_groups = [aws_security_group.rds_sg.id]
   egress {
     from_port   = 0
     to_port     = 0
