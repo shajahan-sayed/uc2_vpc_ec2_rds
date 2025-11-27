@@ -105,10 +105,10 @@ resource "aws_instance" "rds-ec2" {
 
   
   #!/bin/bash
-  apt update -y
-  apt install nginx php-fpm php-mysql -y
-  systemctl enable nginx
-  systemctl start nginx
+  sudo apt update -y
+  sudo apt install nginx php-fpm php-mysql -y
+  sudo systemctl enable nginx
+  sudo systemctl start nginx
 
   cat <<EOT > /var/www/html/index.html
   <html><body>
