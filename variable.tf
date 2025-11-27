@@ -28,9 +28,12 @@ variable "pub_cidr" {
 
 variable "private_cidr" {
   type = string
-  default = "10.0.2.0/24"
+  default = "10.0.4.0/24"
 }
-
+variable "private2_cidr" {
+  type = string
+  default = "10.0.3.0/24"
+}
 variable "db_username" {
   type = string
   default = "shajahan"
@@ -46,7 +49,15 @@ variable "db_name" {
   default = "testdb"
 }
 
-variable "availability_zone" {
+variable "public_az1" {
   type = string 
-  default = "ap-southeast-21"
+  default = "ap-southeast-2a"
+}
+variable "private_az1" {
+  type = string 
+  default = "ap-southeast-2a"
+}
+variable "private2" {
+  type = string 
+  default = "ap-southeast-2a"
 }
