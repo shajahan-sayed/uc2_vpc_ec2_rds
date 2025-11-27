@@ -105,22 +105,22 @@ resource "aws_instance" "rds-ec2" {
 
   
   #!/bin/bash
-apt update -y
-apt install nginx php-fpm php-mysql -y
-systemctl enable nginx
-systemctl start nginx
+  apt update -y
+  apt install nginx php-fpm php-mysql -y
+  systemctl enable nginx
+  systemctl start nginx
 
-cat <<EOT > /var/www/html/index.html
-<html><body>
-<h1>Signup</h1>
-<form action="/signup.php" method="post">
-Name: <input type="text" name="name"><br>
-Mobile: <input type="text" name="mobile"><br>
-Password: <input type="password" name="password"><br>
-<input type="submit" value="Sign Up">
-</form>
-</body></html>
-EOT
+  cat <<EOT > /var/www/html/index.html
+  <html><body>
+  <h1>Signup</h1>
+  <form action="/signup.php" method="post">
+  Name: <input type="text" name="name"><br>
+  Mobile: <input type="text" name="mobile"><br>
+  Password: <input type="password" name="password"><br>
+  <input type="submit" value="Sign Up">
+  </form>
+  </body></html>
+  EOT
 
 
   tags = {
