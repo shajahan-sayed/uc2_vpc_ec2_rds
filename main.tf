@@ -17,6 +17,7 @@ resource "aws_subnet" "public" {
   tags = {
     Name = "public"
   }
+}
 
 resoure "aws_subnet" "private" {
    cidr_block = var.private_cidr
