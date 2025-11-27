@@ -92,7 +92,7 @@ resource "aws_instance" "rds-ec2" {
   instance_type = var.instance_type
   key_name = var.key_name
   subnet_id = aws_subnet.public.id
-  vpc_security_group_ids = [aws_security_group.ec2-sg1.id]
+  vpc_security_group_ids = [aws_security_group.ec2_sg1.id]
 
   
   user_data = <<-EOF
@@ -154,7 +154,7 @@ resource "aws_db_instance" "mysql" {
   engine = "mysql"
   engine_version = "8.0"
   instance_class = "db.t3.micro"
-  name = var.db_name
+  db_name = var.db_name
   password = var.db_password
   username = var.db_username
   db_subnet_group_name = aws_db_subnet_group.main-subnet.id
