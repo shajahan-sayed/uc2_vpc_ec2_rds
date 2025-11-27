@@ -151,7 +151,7 @@ resource "aws_security_group" "rds_sg" {
 resource "aws_db_subnet_group" "main-subnet" {
   name = "main_subnet"
   subnet_ids = [
-          aws_subnet.private.id
+          aws_subnet.private.id,
           aws_subnet.private2.id
   ]
 
