@@ -26,6 +26,11 @@ variable "pub_cidr" {
   default = "10.0.1.0/24"
 }
 
+variable "private_cidr" {
+  type = string
+  default = "10.0.2.0/24"
+}
+
 variable "db_username" {
   type = string
   default = "shajahan"
