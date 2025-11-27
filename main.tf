@@ -19,7 +19,7 @@ resource "aws_subnet" "public" {
   }
 }
 
-resource "aws_subnet" "private1" {
+resource "aws_subnet" "private" {
    cidr_block = var.private_cidr
    vpc_id = aws_vpc.vpc_rds.id
    availability_zone       = var.private_az1
