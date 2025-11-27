@@ -104,25 +104,24 @@ resource "aws_instance" "rds-ec2" {
   vpc_security_group_ids = [aws_security_group.ec2_sg1.id]
 
   
-  user_data = <<-EOF
-              #!/bin/bash
-              yum update -y
-              amazon-linux-extras install nginx1 -y
-              systemctl enable nginx
-              systemctl start nginx
-              # Simple signup page
-              cat <<EOT > /usr/share/nginx/html/index.html
-              <html><body>
-              <h1>Signup</h1>
-              <form action="/signup.php" method="post">
-              Name: <input type="text" name="name"><br>
-              Mobile: <input type="text" name="mobile"><br>
-              Password: <input type="password" name="password"><br>
-              <input type="submit" value="Sign Up">
-              </form>
-              </body></html>
-              EOT
-              EOF
+  #!/bin/bash
+apt update -y
+apt install nginx php-fpm php-mysql -y
+systemctl enable nginx
+systemctl start nginx
+
+cat <<EOT > /var/www/html/index.html
+<html><body>
+<h1>Signup</h1>
+<form action="/signup.php" method="post">
+Name: <input type="text" name="name"><br>
+Mobile: <input type="text" name="mobile"><br>
+Password: <input type="password" name="password"><br>
+<input type="submit" value="Sign Up">
+</form>
+</body></html>
+EOT
+
 
   tags = {
     Name = "rds-ec2"
