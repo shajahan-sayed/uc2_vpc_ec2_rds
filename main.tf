@@ -92,7 +92,7 @@ resource "aws_instance" "rds-ec2" {
   instance_type = var.instance_type
   key_name = var.key_name
   subnet_id = aws_subnet.public.id
-  vpc_security_group_ids = [aws_security_group_id.ec2-sg1.id]
+  vpc_security_group_ids = [aws_security_group.ec2-sg1.id]
 
   
   user_data = <<-EOF
@@ -141,7 +141,7 @@ resource "aws_security_group" "rds_sg" {
 #creating rds instance
 
 resource "aws_db_subnet_group" "main-subnet" {
-  Name = "main_subnet"
+  name = "main_subnet"
   subnet_ids = [aws_subnet.private.id]
 
   tags = {
@@ -157,7 +157,7 @@ resource "aws_db_instance" "mysql" {
   name = var.db_name
   password = var.db_password
   username = var.db_username
-  db_subnet_group_name = aws_db_subnet_group.main-subent.id
+  db_subnet_group_name = aws_db_subnet_group.main-subnet.id
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
 
 }
