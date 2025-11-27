@@ -33,10 +33,15 @@ variable "db_username" {
 
 variable "db_password" {
   type = string
-  default = "shaju@123
+  default = "shaju@123"
 }
 
 variable "db_name" {
   type = string
   default = "testdb"
+}
+
+variable "availability_zone" {
+  type = string 
+  default = "ap-southeast-21"
 }
