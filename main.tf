@@ -36,6 +36,7 @@ resource "aws_subnet" "private2" {
   tags = {
     Name = "private2"
    }
+}
 
  resource "aws_internet_gateway" "igw4" {
    vpc_id = aws_vpc.vpc_rds.id
