@@ -12,22 +12,30 @@ resource "aws_subnet" "public" {
   cidr_block = var.pub_cidr
   vpc_id = aws_vpc.vpc_rds.id
   map_public_ip_on_launch = true
-  availability_zone       = var.availability_zone
+  availability_zone       = var.public_az1
 
   tags = {
     Name = "public"
   }
 }
 
-resource "aws_subnet" "private" {
+resource "aws_subnet" "private1" {
    cidr_block = var.private_cidr
    vpc_id = aws_vpc.vpc_rds.id
-   availability_zone       = var.availability_zone
+   availability_zone       = var.private_az1
 
    tags = {
      Name = "private"
    }
  }
+resource "aws_subnet" "private2" {
+  cidr_block = var.private2_cidr
+  vpc_id = aws_vpc.vpc_rds.id
+  availability_zone = var.private_az2
+
+  tags = {
+    Name = "private2"
+   }
 
  resource "aws_internet_gateway" "igw4" {
    vpc_id = aws_vpc.vpc_rds.id
@@ -142,7 +150,10 @@ resource "aws_security_group" "rds_sg" {
 
 resource "aws_db_subnet_group" "main-subnet" {
   name = "main_subnet"
-  subnet_ids = [aws_subnet.private.id]
+  subnet_ids = [
+          aws_subnet.private.id
+          aws_subnet.private2.id
+  ]
 
   tags = {
     Name = "main-subnet"
