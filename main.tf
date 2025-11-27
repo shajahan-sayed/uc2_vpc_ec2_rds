@@ -103,6 +103,29 @@ resource "aws_instance" "rds-ec2" {
   subnet_id = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.ec2_sg1.id]
 
+  user_data = <<-EOF
+    #!/bin/bash
+    apt update -y
+    apt install -y nginx
+    systemctl enable nginx
+    systemctl start nginx
+
+    cat <<EOT >/var/www/html/index.html
+    <html>
+    <head>
+        <title>Welcome to Terraform NGINX Server</title>
+    </head>
+    <body style="font-family: Arial; text-align: center;">
+        <h1 style="color: green;">Terraform Deployment Successful!</h1>
+        <h2>This page is deployed automatically using Terraform & EC2 user_data</h2>
+        <p>Deployed at: $(date)</p>
+    </body>
+    </html>
+    EOT
+
+    systemctl restart nginx
+  EOF
+
   tags = {
     Name = "rds-ec2"
   }
