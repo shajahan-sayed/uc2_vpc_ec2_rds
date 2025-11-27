@@ -57,7 +57,7 @@ variable "private_az1" {
   type = string 
   default = "ap-southeast-2a"
 }
-variable "private2" {
+variable "private2_az2" {
   type = string 
-  default = "ap-southeast-2a"
+  default = "ap-southeast-2b"
 }
